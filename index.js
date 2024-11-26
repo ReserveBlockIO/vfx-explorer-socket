@@ -1,5 +1,7 @@
 
 const express = require('express');
+const cors = require('cors');
+
 
 const app = express();
 
@@ -9,7 +11,16 @@ const server = app.listen(port, () => {
     console.log(`listening on *:${port}`);
 });
 
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {
+    cors: {
+        origin: "*", // Replace with your client URL
+        methods: ["GET", "POST"],
+        allowedHeaders: ["*"],
+        credentials: false
+    }
+});
+
+app.use(cors());
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
