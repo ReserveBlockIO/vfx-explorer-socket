@@ -47,12 +47,15 @@ app.post('/event/', (req, res) => {
 
     const { room, type, data, message } = req.body;
 
-    console.log(data);
+
+    console.log("room", room);
 
     if (room) {
         io.to(room).emit("event", { type, data, message })
+        console.log("event emitted to room", room, { type, data, message })
     } else {
         io.emit("event", { type, data, message })
+        console.log("event emitted", { type, data, message })
     }
 
     res.status(200).send({})
