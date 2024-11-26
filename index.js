@@ -36,14 +36,12 @@ app.post('/event/', (req, res) => {
 
     const { room, type, data, message } = req.body;
 
+    console.log(data);
+
     if (room) {
         io.to(room).emit("event", { type, data, message })
     } else {
         io.emit("event", { type, data, message })
-    }
-
-    if (type == "log_line") {
-        console.log(`:: ${data.tag} :: ${data.line}`)
     }
 
     res.status(200).send({})
