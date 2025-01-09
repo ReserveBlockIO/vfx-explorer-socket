@@ -47,8 +47,8 @@ app.post('/event/', (req, res) => {
 
     const { room, type, data, message, api_key } = req.body;
 
-    console.log("api_key", api_key)
-    console.log("env api key", process.env.API_KEY)
+    console.log("api_key: " + api_key)
+    console.log("env api key: " + process.env.API_KEY)
 
     if (api_key != process.env.API_KEY) {
         return res.status(403).send({});
@@ -58,10 +58,10 @@ app.post('/event/', (req, res) => {
 
     if (room) {
         io.to(room).emit("event", { type, data, message })
-        console.log("event emitted to room", room, { type, data, message })
+        console.log("event emitted to room " + room)
     } else {
         io.emit("event", { type, data, message })
-        console.log("event emitted", { type, data, message })
+        console.log("event emitted")
     }
 
     res.status(200).send({})
