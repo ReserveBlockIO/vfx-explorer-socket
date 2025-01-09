@@ -45,8 +45,11 @@ app.get('/', (req, res) => {
 
 app.post('/event/', (req, res) => {
 
-    const { room, type, data, message } = req.body;
+    const { room, type, data, message, api_key } = req.body;
 
+    if (api_key != process.env.API_KEY) {
+        return res.status(403).send({});
+    }
 
     console.log("room", room);
 
