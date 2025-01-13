@@ -47,14 +47,14 @@ app.post('/event/', (req, res) => {
 
     const { room, type, data, message, api_key } = req.body;
 
-    console.log("api_key: " + api_key)
-    console.log("env api key: " + process.env.API_KEY)
+    // console.log("api_key: " + api_key)
+    // console.log("env api key: " + process.env.API_KEY)
 
-    if (api_key != process.env.API_KEY) {
-        return res.status(403).send({});
-    }
+    // if (api_key != process.env.API_KEY) {
+    //     return res.status(403).send({});
+    // }
 
-    console.log("room", room);
+    // console.log("room", room);
 
     if (room) {
         io.to(room).emit("event", { type, data, message })
